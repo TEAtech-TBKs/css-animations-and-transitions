@@ -1,0 +1,1551 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Guide to CSS Animations and Transitions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            background: #f4f6fa;
+            color: #252b36;
+            padding: 25px;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        h1, h2, h3 {
+            color: #172554;
+            line-height: 1.4;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-top: 0;
+        }
+
+        h2 {
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 19px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin: 10px 0 20px 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #eef2ff;
+            color: #1d4ed8;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #111827;
+            color: #e5e7eb;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0 20px;
+            line-height: 1.6;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .demo {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .demo-box {
+            width: 100px;
+            height: 100px;
+            background: #2563eb;
+            border-radius: 8px;
+            margin: 15px auto;
+        }
+
+        .transition-demo {
+            transition: all 0.5s ease;
+        }
+
+        .transition-demo:hover {
+            background: #ea580c;
+            transform: scale(1.2);
+            border-radius: 50%;
+        }
+
+        .animation-demo {
+            animation: moveBox 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveBox {
+            from {
+                transform: translateX(-100px);
+                background: #2563eb;
+            }
+
+            to {
+                transform: translateX(100px);
+                background: #ea580c;
+            }
+        }
+
+        .button-demo {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease,
+                        transform 0.3s ease;
+        }
+
+        .button-demo:hover {
+            background: #1e40af;
+            transform: translateY(-5px);
+        }
+
+        .pulse-demo {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .spin-demo {
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fade-demo {
+            animation: fadeIn 2s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-demo {
+            animation: slideIn 2s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .card-demo {
+            width: 230px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #00000010;
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        .card-demo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px #00000020;
+        }
+
+        .comparison {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #e0e7ff;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main>
+
+    <h1>CSS Animations and Transitions</h1>
+
+    <p>
+        CSS animations and transitions are techniques used to add movement,
+        visual effects and interactive behaviour to elements on a webpage.
+        They help make websites more engaging, attractive and user-friendly.
+    </p>
+
+    <p>
+        For example, when you move your mouse over a button and its colour
+        gradually changes, you are seeing a CSS transition. When a loading
+        icon continuously rotates while a webpage is loading, you are seeing
+        a CSS animation.
+    </p>
+
+    <h2>1. What Is CSS Transition?</h2>
+
+    <p>
+        A CSS transition is a technique that allows a CSS property to change
+        gradually from one value to another over a specified period of time.
+    </p>
+
+    <p>
+        Normally, when a CSS property changes, the browser applies the new
+        value immediately. A transition makes the change happen smoothly
+        instead of suddenly.
+    </p>
+
+    <h3>Understanding with an example</h3>
+
+    <p>
+        Imagine you have a blue button. When a user moves their mouse over
+        the button, you want its background colour to change to orange.
+    </p>
+
+    <p>
+        Without a transition, the colour changes immediately. With a
+        transition, the colour gradually changes from blue to orange.
+    </p>
+
+    <h3>HTML</h3>
+
+    <pre><code>&lt;button class="my-button"&gt;
+    Hover Over Me
+&lt;/button&gt;</code></pre>
+
+    <h3>CSS</h3>
+
+    <pre><code>.my-button {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+
+    transition: background-color 0.5s ease;
+}
+
+.my-button:hover {
+    background-color: orange;
+}</code></pre>
+
+    <h3>Breaking down the CSS</h3>
+
+    <ul>
+        <li>
+            <code>background-color: blue;</code> gives the button its
+            original blue background.
+        </li>
+        <li>
+            <code>:hover</code> is a pseudo-class that applies styles when
+            the mouse pointer is over the button.
+        </li>
+        <li>
+            <code>background-color: orange;</code> changes the background
+            to orange when the button is hovered over.
+        </li>
+        <li>
+            <code>transition: background-color 0.5s ease;</code> tells
+            the browser to gradually change the background colour over
+            half a second.
+        </li>
+    </ul>
+
+    <div class="demo">
+        <p><strong>Practical demonstration:</strong> Move your mouse over the button.</p>
+        <button class="button-demo">Hover Over Me</button>
+    </div>
+
+    <h2>2. CSS Transition Properties</h2>
+
+    <p>
+        CSS provides four main transition properties. Each controls a
+        different part of how an element changes.
+    </p>
+
+    <h3>A. transition-property</h3>
+
+    <p>
+        This property specifies which CSS property should have a transition.
+        In other words, it tells the browser what should change smoothly.
+    </p>
+
+    <pre><code>.box {
+    transition-property: background-color;
+}</code></pre>
+
+    <p>
+        The example above means that only changes to the background colour
+        should be animated.
+    </p>
+
+    <p>Other possible values include:</p>
+
+    <ul>
+        <li><code>width</code> - smoothly changes the width.</li>
+        <li><code>height</code> - smoothly changes the height.</li>
+        <li><code>opacity</code> - smoothly changes transparency.</li>
+        <li><code>transform</code> - smoothly changes movement, rotation or size.</li>
+        <li><code>all</code> - applies transitions to all properties that support transitions.</li>
+    </ul>
+
+    <h3>B. transition-duration</h3>
+
+    <p>
+        This property specifies how long the transition should take to
+        complete.
+    </p>
+
+    <pre><code>.box {
+    transition-duration: 1s;
+}</code></pre>
+
+    <p>
+        The value <code>1s</code> means one second.
+    </p>
+
+    <p>Time can be written using:</p>
+
+    <ul>
+        <li><code>s</code> - seconds.</li>
+        <li><code>ms</code> - milliseconds. 1000 milliseconds equals 1 second.</li>
+    </ul>
+
+    <p>Examples:</p>
+
+    <pre><code>transition-duration: 2s;
+transition-duration: 500ms;
+transition-duration: 0.3s;</code></pre>
+
+    <div class="note">
+        <strong>Remember:</strong> A longer duration makes the transition
+        slower, while a shorter duration makes it faster.
+    </div>
+
+    <h3>C. transition-timing-function</h3>
+
+    <p>
+        This property controls the speed pattern of a transition. It
+        determines how the transition accelerates and decelerates while
+        moving from its starting value to its ending value.
+    </p>
+
+    <p>Common timing functions include:</p>
+
+    <ol>
+        <li>
+            <strong>ease:</strong> Starts slowly, speeds up in the middle
+            and slows down towards the end. This is the default value.
+        </li>
+        <li>
+            <strong>linear:</strong> Moves at a constant speed from beginning
+            to end.
+        </li>
+        <li>
+            <strong>ease-in:</strong> Starts slowly and gradually speeds up.
+        </li>
+        <li>
+            <strong>ease-out:</strong> Starts quickly and gradually slows down.
+        </li>
+        <li>
+            <strong>ease-in-out:</strong> Starts slowly, speeds up in the
+            middle and slows down at the end.
+        </li>
+    </ol>
+
+    <pre><code>.box {
+    transition-timing-function: ease-in-out;
+}</code></pre>
+
+    <h3>D. transition-delay</h3>
+
+    <p>
+        This property specifies how long the browser should wait before
+        starting a transition.
+    </p>
+
+    <pre><code>.box {
+    transition-delay: 1s;
+}</code></pre>
+
+    <p>
+        This means that the transition will wait for one second before
+        starting.
+    </p>
+
+    <h3>Combining the four transition properties</h3>
+
+    <pre><code>.box {
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0.5s;
+}</code></pre>
+
+    <p>
+        Writing all four properties separately is perfectly valid. However,
+        CSS provides a shorter way of writing them called the transition
+        shorthand property.
+    </p>
+
+    <h2>3. The transition Shorthand Property</h2>
+
+    <p>
+        The transition shorthand allows you to combine the different
+        transition properties into one declaration.
+    </p>
+
+    <p>General syntax:</p>
+
+    <pre><code>transition: property duration timing-function delay;</code></pre>
+
+    <p>Example:</p>
+
+    <pre><code>.box {
+    transition: background-color 1s ease-in-out 0.5s;
+}</code></pre>
+
+    <p>This is equivalent to writing:</p>
+
+    <pre><code>.box {
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+    transition-delay: 0.5s;
+}</code></pre>
+
+    <p>
+        You can also apply transitions to multiple properties.
+    </p>
+
+    <pre><code>.card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.5s ease;
+}</code></pre>
+
+    <p>
+        Each property has its own transition duration and timing function.
+    </p>
+
+    <h2>4. Practical Transition Examples</h2>
+
+    <h3>Example 1: Changing a box's colour and size</h3>
+
+    <pre><code>&lt;div class="box"&gt;&lt;/div&gt;</code></pre>
+
+    <pre><code>.box {
+    width: 100px;
+    height: 100px;
+    background: blue;
+
+    transition: all 0.5s ease;
+}
+
+.box:hover {
+    width: 200px;
+    height: 200px;
+    background: orange;
+}</code></pre>
+
+    <p>
+        When the user hovers over the box, its width and height increase,
+        while its background gradually changes to orange.
+    </p>
+
+    <h3>Example 2: Rotating an element</h3>
+
+    <pre><code>&lt;div class="rotate-box"&gt;Rotate Me&lt;/div&gt;</code></pre>
+
+    <pre><code>.rotate-box {
+    width: 120px;
+    height: 120px;
+    background: purple;
+    color: white;
+
+    transition: transform 0.5s ease;
+}
+
+.rotate-box:hover {
+    transform: rotate(45deg);
+}</code></pre>
+
+    <p>
+        The <code>transform: rotate(45deg)</code> declaration rotates the
+        element by 45 degrees when hovered over.
+    </p>
+
+    <h3>Example 3: Creating a hover effect on a card</h3>
+
+    <pre><code>&lt;div class="card"&gt;
+    &lt;h3&gt;Web Development&lt;/h3&gt;
+    &lt;p&gt;Learn how to build modern websites.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+    <pre><code>.card {
+    padding: 25px;
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}</code></pre>
+
+    <p>
+        The card moves upwards by 10 pixels and its shadow becomes more
+        noticeable when hovered over. This creates a modern card hover
+        effect commonly used on websites.
+    </p>
+
+    <div class="demo">
+        <p><strong>Live demonstration:</strong> Hover over the card.</p>
+        <div class="card-demo">
+            <h3 style="margin-top:0;">Web Development</h3>
+            <p>Learn how to build modern websites.</p>
+        </div>
+    </div>
+
+    <h2>5. What Is CSS Animation?</h2>
+
+    <p>
+        CSS animation is a technique that allows an element to change from
+        one style to another through a series of defined stages over time.
+    </p>
+
+    <p>
+        Unlike transitions, which generally require a change of state such
+        as hovering or focusing, CSS animations can start automatically
+        when the webpage loads and can repeat continuously.
+    </p>
+
+    <p>
+        For example, you can create:
+    </p>
+
+    <ul>
+        <li>A rotating loading icon.</li>
+        <li>A bouncing ball.</li>
+        <li>A text element that fades into view.</li>
+        <li>A box that moves from left to right.</li>
+        <li>A button that continuously pulses.</li>
+    </ul>
+
+    <h3>Understanding CSS animation with an example</h3>
+
+    <p>
+        Imagine you want a box to move from the left side of a container
+        to the right side automatically.
+    </p>
+
+    <p>
+        You need to define the animation's stages and then tell the browser
+        to execute those stages.
+    </p>
+
+    <h2>6. Understanding @keyframes</h2>
+
+    <p>
+        The <code>@keyframes</code> rule is one of the most important parts
+        of CSS animation.
+    </p>
+
+    <p>
+        It allows you to define the different stages of an animation,
+        including what an element should look like at the beginning,
+        middle and end of the animation.
+    </p>
+
+    <p>Basic syntax:</p>
+
+    <pre><code>@keyframes animationName {
+    from {
+        /* Starting styles */
+    }
+
+    to {
+        /* Ending styles */
+    }
+}</code></pre>
+
+    <p>
+        The words <code>from</code> and <code>to</code> represent the
+        beginning and ending points of the animation.
+    </p>
+
+    <h3>Example: Changing a box's background colour</h3>
+
+    <pre><code>@keyframes changeColor {
+    from {
+        background-color: blue;
+    }
+
+    to {
+        background-color: orange;
+    }
+}</code></pre>
+
+    <p>
+        We have created an animation called <code>changeColor</code>.
+        It starts with a blue background and ends with an orange background.
+    </p>
+
+    <p>
+        However, defining keyframes alone does not make the animation run.
+        We must apply the animation to an HTML element.
+    </p>
+
+    <pre><code>.box {
+    width: 100px;
+    height: 100px;
+    background: blue;
+
+    animation: changeColor 3s;
+}</code></pre>
+
+    <p>
+        The animation property tells the browser to execute the
+        <code>changeColor</code> animation over three seconds.
+    </p>
+
+    <h2>7. Using Percentages in @keyframes</h2>
+
+    <p>
+        Instead of using only <code>from</code> and <code>to</code>,
+        you can use percentages to define multiple stages of an animation.
+    </p>
+
+    <p>
+        The percentages represent how far the animation has progressed:
+    </p>
+
+    <ul>
+        <li><code>0%</code> - the beginning of the animation.</li>
+        <li><code>25%</code> - one-quarter of the animation.</li>
+        <li><code>50%</code> - halfway through the animation.</li>
+        <li><code>75%</code> - three-quarters of the animation.</li>
+        <li><code>100%</code> - the end of the animation.</li>
+    </ul>
+
+    <h3>Example: A box changing colours at different stages</h3>
+
+    <pre><code>@keyframes multiColor {
+    0% {
+        background: blue;
+    }
+
+    25% {
+        background: red;
+    }
+
+    50% {
+        background: yellow;
+    }
+
+    75% {
+        background: purple;
+    }
+
+    100% {
+        background: green;
+    }
+}</code></pre>
+
+    <p>
+        The box starts as blue, becomes red at 25%, yellow at 50%,
+        purple at 75%, and green at the end.
+    </p>
+
+    <p>
+        To apply it:
+    </p>
+
+    <pre><code>.box {
+    width: 100px;
+    height: 100px;
+    animation: multiColor 5s;
+}</code></pre>
+
+    <div class="note">
+        <strong>Important:</strong> You can use as many percentage stages
+        as necessary to create the movement or visual effect you want.
+    </div>
+
+    <h2>8. CSS Animation Properties</h2>
+
+    <p>
+        CSS provides several animation properties that control how an
+        animation behaves.
+    </p>
+
+    <h3>A. animation-name</h3>
+
+    <p>
+        This property specifies the name of the animation you want to apply.
+        It must match the name defined inside the <code>@keyframes</code> rule.
+    </p>
+
+    <pre><code>@keyframes moveBox {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(200px);
+    }
+}
+
+.box {
+    animation-name: moveBox;
+}</code></pre>
+
+    <p>
+        The animation name is <code>moveBox</code>. The element will use
+        the stages defined inside <code>@keyframes moveBox</code>.
+    </p>
+
+    <h3>B. animation-duration</h3>
+
+    <p>
+        This property specifies how long one complete cycle of an animation
+        should take.
+    </p>
+
+    <pre><code>.box {
+    animation-duration: 3s;
+}</code></pre>
+
+    <p>
+        The animation will take three seconds to move from its beginning
+        to its end.
+    </p>
+
+    <h3>C. animation-timing-function</h3>
+
+    <p>
+        This property controls the speed pattern of the animation.
+        It determines how the animation accelerates or decelerates.
+    </p>
+
+    <pre><code>.box {
+    animation-timing-function: ease-in-out;
+}</code></pre>
+
+    <p>
+        Common values include:
+    </p>
+
+    <ul>
+        <li><code>ease</code> - starts slowly, speeds up, then slows down.</li>
+        <li><code>linear</code> - maintains a constant speed.</li>
+        <li><code>ease-in</code> - starts slowly and speeds up.</li>
+        <li><code>ease-out</code> - starts quickly and slows down.</li>
+        <li><code>ease-in-out</code> - starts and ends slowly.</li>
+    </ul>
+
+    <h3>D. animation-delay</h3>
+
+    <p>
+        This property determines how long the browser should wait before
+        starting the animation.
+    </p>
+
+    <pre><code>.box {
+    animation-delay: 2s;
+}</code></pre>
+
+    <p>
+        The animation will wait two seconds before it begins.
+    </p>
+
+    <h3>E. animation-iteration-count</h3>
+
+    <p>
+        This property determines how many times an animation should repeat.
+    </p>
+
+    <pre><code>.box {
+    animation-iteration-count: 3;
+}</code></pre>
+
+    <p>
+        The animation will run three times.
+    </p>
+
+    <p>You can also use:</p>
+
+    <pre><code>animation-iteration-count: infinite;</code></pre>
+
+    <p>
+        This makes the animation repeat continuously without stopping.
+    </p>
+
+    <h3>F. animation-direction</h3>
+
+    <p>
+        This property specifies the direction in which an animation should
+        play.
+    </p>
+
+    <p>Common values:</p>
+
+    <ul>
+        <li>
+            <code>normal</code> - plays from the first keyframe to the last.
+        </li>
+        <li>
+            <code>reverse</code> - plays from the last keyframe to the first.
+        </li>
+        <li>
+            <code>alternate</code> - plays forward, then backward, repeatedly.
+        </li>
+        <li>
+            <code>alternate-reverse</code> - plays backward first, then forward.
+        </li>
+    </ul>
+
+    <p>Example:</p>
+
+    <pre><code>.box {
+    animation: moveBox 2s infinite alternate;
+}</code></pre>
+
+    <p>
+        The box moves forward and then returns to its original position
+        before repeating.
+    </p>
+
+    <h3>G. animation-fill-mode</h3>
+
+    <p>
+        This property determines what styles an element should retain
+        before or after an animation runs.
+    </p>
+
+    <ul>
+        <li>
+            <code>none</code> - the element does not retain the animation's
+            styles before or after it runs. This is the default.
+        </li>
+        <li>
+            <code>forwards</code> - the element retains the styles from
+            the last keyframe after the animation finishes.
+        </li>
+        <li>
+            <code>backwards</code> - applies the styles from the first
+            relevant keyframe during the animation delay.
+        </li>
+        <li>
+            <code>both</code> - combines the effects of forwards and backwards.
+        </li>
+    </ul>
+
+    <p>Example:</p>
+
+    <pre><code>.box {
+    animation: fadeIn 2s forwards;
+}</code></pre>
+
+    <p>
+        When the animation finishes, the element keeps the styles specified
+        in its final keyframe.
+    </p>
+
+    <h3>H. animation-play-state</h3>
+
+    <p>
+        This property controls whether an animation is running or paused.
+    </p>
+
+    <pre><code>.box {
+    animation-play-state: running;
+}
+
+.box:hover {
+    animation-play-state: paused;
+}</code></pre>
+
+    <p>
+        In this example, the animation runs normally but pauses when the
+        user hovers over the box.
+    </p>
+
+    <h2>9. The animation Shorthand Property</h2>
+
+    <p>
+        Just like transitions, CSS animations can be written using a
+        shorthand property.
+    </p>
+
+    <p>General syntax:</p>
+
+    <pre><code>animation: name duration timing-function delay
+           iteration-count direction fill-mode play-state;</code></pre>
+
+    <p>Example:</p>
+
+    <pre><code>.box {
+    animation: moveBox 3s ease-in-out 1s infinite alternate forwards;
+}</code></pre>
+
+    <p>Breaking down the declaration:</p>
+
+    <ul>
+        <li><code>moveBox</code> - name of the animation.</li>
+        <li><code>3s</code> - duration of each cycle.</li>
+        <li><code>ease-in-out</code> - speed pattern.</li>
+        <li><code>1s</code> - delay before starting.</li>
+        <li><code>infinite</code> - repeats continuously.</li>
+        <li><code>alternate</code> - moves forward and backward.</li>
+        <li><code>forwards</code> - retains the final keyframe's styles.</li>
+    </ul>
+
+    <div class="warning">
+        <strong>Note:</strong> The animation shorthand has an optional
+        play-state value. If you need to pause an animation, you can use
+        the longhand property separately.
+    </div>
+
+    <h2>10. Practical CSS Animation Examples</h2>
+
+    <h3>Example 1: Creating a rotating loading icon</h3>
+
+    <p>
+        A loading spinner is commonly used to indicate that a webpage or
+        application is processing something.
+    </p>
+
+    <pre><code>&lt;div class="spinner"&gt;&lt;/div&gt;</code></pre>
+
+    <pre><code>.spinner {
+    width: 60px;
+    height: 60px;
+
+    border: 6px solid #ddd;
+    border-top-color: blue;
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}</code></pre>
+
+    <p>Explanation:</p>
+
+    <ul>
+        <li>
+            <code>border</code> creates the circular outline.
+        </li>
+        <li>
+            <code>border-top-color</code> changes the top section to blue,
+            making the rotation visible.
+        </li>
+        <li>
+            <code>border-radius: 50%</code> makes the element circular.
+        </li>
+        <li>
+            <code>rotate(360deg)</code> rotates the circle through one
+            complete revolution.
+        </li>
+        <li>
+            <code>linear</code> ensures that it rotates at a constant speed.
+        </li>
+        <li>
+            <code>infinite</code> makes the spinner rotate continuously.
+        </li>
+    </ul>
+
+    <div class="demo">
+        <p><strong>Live demonstration: Rotating spinner</strong></p>
+        <div class="demo-box spin-demo"
+             style="width:60px;height:60px;border:6px solid #ddd;border-top-color:blue;border-radius:50%;background:transparent;">
+        </div>
+    </div>
+
+    <h3>Example 2: Creating a bouncing or pulsing element</h3>
+
+    <pre><code>&lt;div class="pulse-box"&gt;&lt;/div&gt;</code></pre>
+
+    <pre><code>.pulse-box {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    border-radius: 10px;
+
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}</code></pre>
+
+    <p>
+        The <code>scale()</code> function changes the size of an element.
+        At 50%, the box becomes 1.2 times its original size. At 100%, it
+        returns to its original size.
+    </p>
+
+    <div class="demo">
+        <p><strong>Live demonstration: Pulsing box</strong></p>
+        <div class="demo-box pulse-demo"></div>
+    </div>
+
+    <h3>Example 3: Creating a fade-in effect</h3>
+
+    <p>
+        A fade-in effect makes an element gradually appear on the screen.
+    </p>
+
+    <pre><code>&lt;h2 class="fade-text"&gt;Welcome to My Website&lt;/h2&gt;</code></pre>
+
+    <pre><code>.fade-text {
+    animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}</code></pre>
+
+    <p>Explanation:</p>
+
+    <ul>
+        <li>
+            <code>opacity: 0</code> makes the text completely transparent.
+        </li>
+        <li>
+            <code>opacity: 1</code> makes it completely visible.
+        </li>
+        <li>
+            <code>translateY(20px)</code> starts the text 20 pixels below
+            its final position.
+        </li>
+        <li>
+            <code>translateY(0)</code> moves it back to its normal position.
+        </li>
+        <li>
+            <code>forwards</code> ensures it retains its final visible state.
+        </li>
+    </ul>
+
+    <div class="demo">
+        <p><strong>Live demonstration: Fade-in effect</strong></p>
+        <h2 class="fade-demo" style="text-align:center;margin:20px 0;">
+            Welcome to My Website
+        </h2>
+    </div>
+
+    <h3>Example 4: Creating a slide-in effect</h3>
+
+    <p>
+        A slide-in animation makes an element enter the screen from a
+        particular direction.
+    </p>
+
+    <pre><code>.slide-text {
+    animation: slideIn 1.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}</code></pre>
+
+    <p>
+        The element begins 100 pixels to the left of its normal position
+        and gradually moves into place.
+    </p>
+
+    <div class="demo">
+        <p><strong>Live demonstration: Slide-in effect</strong></p>
+        <h3 class="slide-demo" style="text-align:center;">
+            I Slide Into View!
+        </h3>
+    </div>
+
+    <h2>11. Understanding CSS transform Functions</h2>
+
+    <p>
+        You will notice that many animation and transition examples use
+        the <code>transform</code> property.
+    </p>
+
+    <p>
+        The transform property allows you to change the appearance and
+        position of an element without changing the normal document flow.
+    </p>
+
+    <p>Some commonly used transform functions include:</p>
+
+    <h3>A. translate()</h3>
+
+    <p>
+        Moves an element horizontally and vertically.
+    </p>
+
+    <pre><code>transform: translate(50px, 20px);</code></pre>
+
+    <p>
+        Moves the element 50 pixels to the right and 20 pixels down.
+    </p>
+
+    <h3>B. translateX()</h3>
+
+    <p>Moves an element horizontally.</p>
+
+    <pre><code>transform: translateX(100px);</code></pre>
+
+    <p>Moves the element 100 pixels to the right.</p>
+
+    <h3>C. translateY()</h3>
+
+    <p>Moves an element vertically.</p>
+
+    <pre><code>transform: translateY(-20px);</code></pre>
+
+    <p>Moves the element 20 pixels upwards.</p>
+
+    <h3>D. scale()</h3>
+
+    <p>
+        Increases or decreases the size of an element.
+    </p>
+
+    <pre><code>transform: scale(1.5);</code></pre>
+
+    <p>
+        Makes the element 1.5 times its original size.
+    </p>
+
+    <pre><code>transform: scale(0.5);</code></pre>
+
+    <p>Makes the element half its original size.</p>
+
+    <h3>E. rotate()</h3>
+
+    <p>
+        Rotates an element by a specified angle.
+    </p>
+
+    <pre><code>transform: rotate(45deg);</code></pre>
+
+    <p>Rotates the element 45 degrees clockwise.</p>
+
+    <h3>F. skew()</h3>
+
+    <p>
+        Slants an element along the horizontal or vertical axis.
+    </p>
+
+    <pre><code>transform: skew(20deg);</code></pre>
+
+    <p>
+        Slants the element along the horizontal axis.
+    </p>
+
+    <div class="note">
+        <strong>Important:</strong> Transform functions can be combined.
+        For example:
+        <code>transform: translateY(-10px) scale(1.05) rotate(5deg);</code>
+    </div>
+
+    <h2>12. Difference Between CSS Transition and Animation</h2>
+
+    <div class="comparison">
+        <table>
+            <tr>
+                <th>CSS Transition</th>
+                <th>CSS Animation</th>
+            </tr>
+            <tr>
+                <td>Usually requires a change of state or property value to start.</td>
+                <td>Can start automatically when the page loads.</td>
+            </tr>
+            <tr>
+                <td>Generally moves between a starting and ending state.</td>
+                <td>Can contain multiple stages using keyframes.</td>
+            </tr>
+            <tr>
+                <td>Does not have a built-in repeat-count property.</td>
+                <td>Can repeat using animation-iteration-count.</td>
+            </tr>
+            <tr>
+                <td>Commonly used for hover and focus effects.</td>
+                <td>Commonly used for loaders, movement and visual sequences.</td>
+            </tr>
+            <tr>
+                <td>Uses the transition properties.</td>
+                <td>Uses @keyframes and animation properties.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2>13. When Should You Use Transitions or Animations?</h2>
+
+    <h3>Use CSS transitions when:</h3>
+
+    <ul>
+        <li>A button changes colour when hovered over.</li>
+        <li>A card moves upwards when hovered over.</li>
+        <li>A navigation link changes its appearance.</li>
+        <li>An image zooms in when hovered over.</li>
+        <li>A form input changes its border colour when focused.</li>
+    </ul>
+
+    <h3>Use CSS animations when:</h3>
+
+    <ul>
+        <li>You want a loading icon to rotate continuously.</li>
+        <li>You want text to fade into view automatically.</li>
+        <li>You want an element to bounce repeatedly.</li>
+        <li>You want an object to move through several positions.</li>
+        <li>You want to create an automatically moving visual effect.</li>
+    </ul>
+
+    <h2>14. Common Mistakes to Avoid</h2>
+
+    <ol>
+        <li>
+            <strong>Forgetting to define @keyframes:</strong>
+            An animation name must match an existing keyframes rule.
+        </li>
+        <li>
+            <strong>Applying transition only inside :hover:</strong>
+            In most hover effects, place the transition on the normal
+            element so that both entering and leaving the hover state
+            happen smoothly.
+        </li>
+        <li>
+            <strong>Using invalid time values:</strong>
+            Write values such as <code>1s</code> or <code>500ms</code>.
+        </li>
+        <li>
+            <strong>Forgetting the animation duration:</strong>
+            Without a duration, the animation duration defaults to zero.
+        </li>
+        <li>
+            <strong>Using too many animations:</strong>
+            Excessive movement can distract visitors and make a website
+            difficult to use.
+        </li>
+        <li>
+            <strong>Forgetting animation-fill-mode:</strong>
+            If an element must retain its final animated style, consider
+            using <code>forwards</code>.
+        </li>
+        <li>
+            <strong>Conflicting transform declarations:</strong>
+            If you declare transform twice in the same CSS rule, the later
+            declaration replaces the earlier one. Combine the transform
+            functions when necessary.
+        </li>
+    </ol>
+
+    <h2>15. Performance and Accessibility Tips</h2>
+
+    <p>
+        CSS animations should improve the user experience, not make the
+        website uncomfortable or slow.
+    </p>
+
+    <ul>
+        <li>
+            Prefer animating <code>transform</code> and <code>opacity</code>
+            where possible because they are generally more efficient.
+        </li>
+        <li>
+            Avoid unnecessarily animating properties such as width, height
+            and position when transform can achieve the same effect.
+        </li>
+        <li>
+            Avoid animations that flash rapidly or move excessively.
+        </li>
+        <li>
+            Respect users who prefer reduced motion.
+        </li>
+    </ul>
+
+    <h3>Understanding prefers-reduced-motion</h3>
+
+    <p>
+        Some users may experience discomfort from excessive movement on
+        websites. CSS provides a media query that allows developers to
+        reduce or remove animations for users who have enabled reduced
+        motion in their device accessibility settings.
+    </p>
+
+    <pre><code>@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}</code></pre>
+
+    <h2>16. Practical Class Exercises</h2>
+
+    <p>
+        Use the knowledge from this lesson to complete the following
+        exercises.
+    </p>
+
+    <h3>Exercise 1: Button Hover Transition</h3>
+
+    <ol>
+        <li>Create a button using HTML.</li>
+        <li>Give the button a blue background and white text.</li>
+        <li>Remove its default border.</li>
+        <li>Add a border-radius of 8px.</li>
+        <li>When hovered over, change the background to orange.</li>
+        <li>Make the colour change take 0.5 seconds.</li>
+    </ol>
+
+    <h3>Exercise 2: Animated Circle</h3>
+
+    <ol>
+        <li>Create a circular div with a width and height of 100px.</li>
+        <li>Give it a red background.</li>
+        <li>Use @keyframes to rotate it through 360 degrees.</li>
+        <li>Make the animation last 3 seconds.</li>
+        <li>Make the animation repeat infinitely.</li>
+    </ol>
+
+    <h3>Exercise 3: Card Hover Effect</h3>
+
+    <ol>
+        <li>Create a card containing an image, heading and paragraph.</li>
+        <li>Give the card a white background and box shadow.</li>
+        <li>When hovered over, move the card upwards by 10px.</li>
+        <li>Increase the shadow intensity.</li>
+        <li>Use CSS transitions to make the changes smooth.</li>
+    </ol>
+
+    <h3>Exercise 4: Create a Fade-in Text Animation</h3>
+
+    <ol>
+        <li>Create an h1 element with the text "Welcome to My Website".</li>
+        <li>Make the text initially transparent.</li>
+        <li>Use @keyframes to gradually increase its opacity to 1.</li>
+        <li>Move the text upwards into its normal position.</li>
+        <li>Make the animation last 2 seconds.</li>
+    </ol>
+
+    <h2>17. Final Class Project</h2>
+
+    <h3>Project Title: Animated Profile Card</h3>
+
+    <p>
+        Create a personal profile card using HTML and CSS. Your card should
+        contain:
+    </p>
+
+    <ul>
+        <li>A profile image.</li>
+        <li>Your full name.</li>
+        <li>Your occupation or area of interest.</li>
+        <li>A short description about yourself.</li>
+        <li>Three social media links.</li>
+        <li>A contact button.</li>
+    </ul>
+
+    <h3>Styling Requirements</h3>
+
+    <ol>
+        <li>Give the card a clean and modern design.</li>
+        <li>Add a smooth transition to the card.</li>
+        <li>When hovered over, the card should move upwards slightly.</li>
+        <li>The profile image should zoom in slightly when hovered over.</li>
+        <li>The contact button should change colour smoothly.</li>
+        <li>Make the heading fade into view using CSS animation.</li>
+        <li>Ensure the card is responsive on mobile devices.</li>
+    </ol>
+
+    <h2>18. Summary</h2>
+
+    <p>
+        CSS transitions and animations are important tools for creating
+        interactive and visually appealing websites.
+    </p>
+
+    <p>
+        A transition allows a CSS property to change smoothly from one
+        value to another, usually in response to an interaction such as
+        hovering or focusing.
+    </p>
+
+    <p>
+        An animation allows an element to move through different visual
+        stages defined using the <code>@keyframes</code> rule. Animations
+        can start automatically, repeat continuously, move in different
+        directions and run through several stages.
+    </p>
+
+    <p>
+        Understanding when and how to use both techniques will help you
+        create more professional and engaging web interfaces.
+    </p>
+
+    <div class="note">
+        <strong>Key takeaway:</strong>
+        Transitions are particularly useful for smooth interactive changes,
+        while animations are useful when you need more control over movement
+        and multiple stages of an effect.
+    </div>
+
+    <footer>
+        CSS Animations and Transitions | HTML & CSS Learning Notes
+    </footer>
+
+</main>
+
+</body>
+</html>
